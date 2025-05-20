@@ -1,0 +1,22 @@
+.about-section {
+    padding: 4rem 2rem;
+    background-color: #f9f9f9;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    color: #009688;
+    margin-bottom: 2rem;
+  }
+  
+  .about-content {
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+    text-align: left;
+  }
+  

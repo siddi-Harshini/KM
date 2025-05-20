@@ -1,0 +1,14 @@
+.contact-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: left;
+  }
+  
+  .contact-section p {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  

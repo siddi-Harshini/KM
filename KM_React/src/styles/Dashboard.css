@@ -1,0 +1,15 @@
+.sidebar-item {
+  transition: background 0.2s, text-decoration 0.2s;
+}
+
+.sidebar-item:hover {
+  background: #26a69a !important;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.sidebar-item.active {
+  background: #00897b !important;
+}
+.sidebar-item.logout {
+  background: #00897b !important;
+}
