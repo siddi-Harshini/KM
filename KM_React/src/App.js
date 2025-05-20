@@ -16,7 +16,7 @@ function ProtectedRoute({ children }) {
 
 function AppContent() {
   const location = useLocation();
-  const isDashboard = location.pathname === '/dashboard';
+  const isDashboard = location.pathname.startsWith('/dashboard');
 
   return (
     <div className="app-container" style={{ position: 'relative', minHeight: '100vh' }}>
@@ -40,7 +40,7 @@ function AppContent() {
             </>
           } />
           <Route
-            path="/dashboard"
+            path="/dashboard/*"
             element={
               <ProtectedRoute>
                 <Dashboard />

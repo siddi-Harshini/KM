@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import LoginPopup from './LoginPopup';
+import LoginPopup from './pages/LoginPopup';
 import { useAuth } from './AuthContext';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Header.css';
