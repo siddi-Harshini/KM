@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:3001/") // Allow requests from frontend
+@CrossOrigin(origins = "http://localhost:3000/") // Allow requests from frontend
 public class AuthController {
 
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private CreditorRepository creditorRepository;
    
 
     @GetMapping("/users")
@@ -35,5 +38,10 @@ public class AuthController {
         } else {
             return new LoginResponse(false, "Invalid username or password");
         }
+    }
+
+    @GetMapping("/banks")
+    public List<Creditor> getAllBanks() {
+        return creditorRepository.findAll();
     }
 }
