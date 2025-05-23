@@ -1,10 +1,11 @@
 package com.KM.KM_Valuers;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,11 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:3000/") // Allow requests from frontend
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001"}) // Allow requests from both frontend ports
 public class AuthController {
 
     @Autowired
@@ -70,9 +70,90 @@ public class AuthController {
         return dtos;
     }
 
-    @GetMapping("/inward_register/{fileNumber}")
-    public InwardRegister getInwardRegisterByFileNumber(@PathVariable String fileNumber) {
-        return inwardRegisterRepository.findByFileNumber(fileNumber)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "File not found"));
+    
+
+    @GetMapping("/inward_register/search/village/{village}")
+    public List<InwardRegisterDTO> searchByVillage(@PathVariable String village) {
+        List<Object[]> results = inwardRegisterRepository.findByVillageContainingIgnoreCase(village);
+        List<InwardRegisterDTO> dtos = new ArrayList<>();
+        for (Object[] row : results) {
+            InwardRegisterDTO dto = new InwardRegisterDTO();
+            dto.setSNo(((Number) row[0]).longValue());
+            dto.setFileNumber((String) row[1]);
+            dto.setBank((String) row[2]);
+            dto.setInwardDate(row[3] != null ? row[3].toString() : null);
+            dto.setVillageOrTown((String) row[4]);
+            dto.setStatus((String) row[5]);
+            dto.setRemarks((String) row[6]);
+            dtos.add(dto);
+        }
+        return dtos;
+    }
+
+    @GetMapping("/inward_register/search/file/{fileNumber}")
+    public List<InwardRegisterDTO> searchByFileNumber(@PathVariable String fileNumber) {
+        List<Object[]> results = inwardRegisterRepository.findByFileNumberContainingIgnoreCase(fileNumber);
+        List<InwardRegisterDTO> dtos = new ArrayList<>();
+        for (Object[] row : results) {
+            InwardRegisterDTO dto = new InwardRegisterDTO();
+            dto.setSNo(((Number) row[0]).longValue());
+            dto.setFileNumber((String) row[1]);
+            dto.setBank((String) row[2]);
+            dto.setInwardDate(row[3] != null ? row[3].toString() : null);
+            dto.setVillageOrTown((String) row[4]);
+            dto.setStatus((String) row[5]);
+            dto.setRemarks((String) row[6]);
+            dtos.add(dto);
+        }
+        return dtos;
+    }
+
+    @GetMapping("/inward_register/search/date/{date}")
+    public List<InwardRegisterDTO> searchByDate(@PathVariable String date) {
+        List<Object[]> results = inwardRegisterRepository.findByInwardDate(date);
+        List<InwardRegisterDTO> dtos = new ArrayList<>();
+        for (Object[] row : results) {
+            InwardRegisterDTO dto = new InwardRegisterDTO();
+            dto.setSNo(((Number) row[0]).longValue());
+            dto.setFileNumber((String) row[1]);
+            dto.setBank((String) row[2]);
+            dto.setInwardDate(row[3] != null ? row[3].toString() : null);
+            dto.setVillageOrTown((String) row[4]);
+            dto.setStatus((String) row[5]);
+            dto.setRemarks((String) row[6]);
+            dtos.add(dto);
+        }
+        return dtos;
+    }
+
+    @GetMapping("/inward_register/recent")
+    public List<InwardRegisterDTO> getRecentPendingInwardRegisters() {
+        List<Object[]> results = inwardRegisterRepository.findPendingInwardRegisters();
+        List<InwardRegisterDTO> dtos = new ArrayList<>();
+        LocalDate today = LocalDate.now();
+        LocalDate twoDaysAgo = today.minusDays(1); // last 2 days: today and yesterday
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        for (Object[] row : results) {
+            String inwardDateStr = row[3] != null ? row[3].toString() : null;
+            if (inwardDateStr != null) {
+                try {
+                    LocalDate inwardDate = LocalDate.parse(inwardDateStr, formatter);
+                    if (!inwardDate.isBefore(twoDaysAgo) && !inwardDate.isAfter(today)) {
+                        InwardRegisterDTO dto = new InwardRegisterDTO();
+                        dto.setSNo(((Number) row[0]).longValue());
+                        dto.setFileNumber((String) row[1]);
+                        dto.setBank((String) row[2]);
+                        dto.setInwardDate(inwardDateStr);
+                        dto.setVillageOrTown((String) row[4]);
+                        dto.setStatus((String) row[5]);
+                        dto.setRemarks((String) row[6]);
+                        dtos.add(dto);
+                    }
+                } catch (Exception e) {
+                    // Ignore parse errors
+                }
+            }
+        }
+        return dtos;
     }
 }

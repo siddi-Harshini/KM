@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useAuth } from '../AuthContext';
 
 const LoginPopup = ({ onClose, onLoginSuccess }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState('');
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,6 +19,7 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
       });
       const data = await response.json();
       if (data.success) {
+        login();
         if (onLoginSuccess) onLoginSuccess();
       } else {
         setError('Invalid username or password');
