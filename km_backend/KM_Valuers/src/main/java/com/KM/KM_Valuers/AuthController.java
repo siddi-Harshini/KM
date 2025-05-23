@@ -7,12 +7,17 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestController
 @RequestMapping("/api")
@@ -50,6 +55,27 @@ public class AuthController {
     @GetMapping("/banks")
     public List<Creditor> getAllBanks() {
         return creditorRepository.findAll();
+    }
+    
+    @PostMapping("/banks")
+    public Creditor addBank(@RequestBody Creditor creditor) {
+        return creditorRepository.save(creditor);
+    }
+
+    @DeleteMapping("/banks/{id}")
+    public void deleteBank(@PathVariable Long id) {
+        creditorRepository.deleteById(id);
+    }
+
+    @PutMapping("/banks/{id}")
+    public Creditor updateBank(@PathVariable Long id, @RequestBody Creditor updated) {
+        return creditorRepository.findById(id).map(bank -> {
+            bank.setBankName(updated.getBankName());
+            bank.setBranch(updated.getBranch());
+            bank.setArea(updated.getArea());
+            bank.setState(updated.getState());
+            return creditorRepository.save(bank);
+        }).orElseThrow(() -> new ResponseStatusException(NOT_FOUND));
     }
 
     @GetMapping("/inward_register")
@@ -155,5 +181,10 @@ public class AuthController {
             }
         }
         return dtos;
+    }
+
+    @PostMapping("/inward_register")
+    public InwardRegister addInwardRegister(@RequestBody InwardRegister inwardRegister) {
+        return inwardRegisterRepository.save(inwardRegister);
     }
 }

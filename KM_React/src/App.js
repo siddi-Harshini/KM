@@ -8,6 +8,9 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
 import { useAuth } from './components/AuthContext';
+import InwardRegisterPage from './components/pages/InwardRegisterPage';
+import InwardRegistryPage from './components/pages/InwardRegisterPage';
+import InwardRegisterForm from './components/pages/InwardRegisterForm';
 
 function ProtectedRoute({ children }) {
   const { isLoggedIn } = useAuth();
@@ -47,6 +50,8 @@ function AppContent() {
               </ProtectedRoute>
             }
           />
+          <Route path="/registry/*" element={<InwardRegisterPage />} />
+          
         </Routes>
       </main>
       {!isDashboard && <Footer />}

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import InwardRegisterForm from './InwardRegisterForm';
 
 const InwardRegisterPage = () => {
   const [inwards, setInwards] = useState([]);
@@ -6,6 +8,7 @@ const InwardRegisterPage = () => {
   const [fileSearch, setFileSearch] = useState("");
   const [villageSearch, setVillageSearch] = useState("");
   const [dateFilter, setDateFilter] = useState("");
+  const navigate = useNavigate();
 
   // Helper to fetch and set data
   const fetchAndSet = (url) => {
@@ -56,14 +59,27 @@ const InwardRegisterPage = () => {
     else fetchAndSet('http://localhost:8085/api/inward_register/recent');
   };
 
-  // Format date as DD-MM-YYYY
-  const formatDateDMY = (dateStr) => {
-    if (!dateStr) return '';
-    const [datePart] = dateStr.split('T');
-    const [year, month, day] = datePart.split('-');
-    if (!year || !month || !day) return dateStr;
-    return `${day}-${month}-${year}`;
-  };
+  // Convert "2025-05-23" to "23/05/2025"
+  function formatDate(input) {
+    if (!input) return '';
+    const [year, month, day] = input.split('-');
+    return `${day}/${month}/${year}`;
+  }
+
+  function parseDMY(dateStr) {
+    if (!dateStr) return new Date(0);
+    const [day, month, year] = dateStr.split('/');
+    return new Date(`${year}-${month}-${day}`);
+  }
+
+  // In your render/filter logic:
+  const filteredInwards = inwards.filter(item => {
+    // ...other filters...
+    if (dateFilter) {
+      return item.inwardDate === formatDate(dateFilter);
+    }
+    return true;
+  }).sort((a, b) => parseDMY(b.inwardDate) - parseDMY(a.inwardDate));
 
   return (
     <div>
@@ -85,18 +101,31 @@ const InwardRegisterPage = () => {
           maxLength={50}
         />
         <input
-          style={{ flex: 1, padding: 10, borderRadius: 16, border: '1px solid #bbb' }}
           type="date"
           value={dateFilter}
-          onChange={handleDateFilter}
+          onChange={e => setDateFilter(e.target.value)}
         />
-        <a
+        <button
+          type="button"
           className="w3-button w3-green"
-          style={{ flex: 1, borderRadius: 16, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', color: '#fff', fontWeight: 'bold' }}
-          href="#"
+          style={{
+            flex: 1,
+            borderRadius: 16,
+            textAlign: 'center',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#fff',
+            fontWeight: 'bold',
+            border: 'none',
+            background: '#43a047',
+            fontSize: 18,
+            cursor: 'pointer'
+          }}
+          onClick={() => navigate('new')}
         >
           New?
-        </a>
+        </button>
       </form>
       <div style={{
         background: '#43a047',
@@ -110,50 +139,55 @@ const InwardRegisterPage = () => {
       }}>
         Inward Registry <span style={{ fontWeight: 400, fontSize: 14 }}></span>
       </div>
-      <table style={{
-        width: '100%',
-        borderCollapse: 'collapse',
-        background: '#fff'
-      }}>
-        <thead>
-          <tr style={{ background: '#ff9800', fontWeight: 600, color: '#fff' }}>
-            <th style={thStyle}>SNo</th>
-            <th style={thStyle}>File Number</th>
-            <th style={thStyle}>Bank</th>
-            <th style={thStyle}>Inward Date</th>
-            <th style={thStyle}>Village / Town</th>
-            <th style={thStyle}>Status</th>
-            <th style={thStyle}>Remarks</th>
-          </tr>
-        </thead>
-        <tbody>
-          {loading ? (
-            <tr>
-              <td colSpan={7} style={{ textAlign: 'center', padding: 20 }}>Loading...</td>
-            </tr>
-          ) : inwards.length === 0 ? (
-            <tr>
-              <td colSpan={7} style={{ textAlign: 'center', padding: 20 }}>No records found.</td>
-            </tr>
-          ) : (
-            inwards.map((item, idx) => (
-              <tr key={item.id || idx} style={{ background: idx % 2 === 0 ? '#f9f9f9' : '#fff' }}>
-                <td style={tdStyle}>{idx + 1}</td>
-                <td style={tdStyle}>
-                  <button style={{ color: '#2196f3', background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontWeight: 600 }} value={item.fileNumber} name="file_number">
-                    {item.fileNumber}
-                  </button>
-                </td>
-                <td style={tdStyle}>{item.bank}</td>
-                <td style={tdStyle}>{formatDateDMY(item.inwardDate)}</td>
-                <td style={tdStyle}>{item.villageOrTown}</td>
-                <td style={tdStyle}>{item.status}</td>
-                <td style={tdStyle}>{item.remarks}</td>
+      <Routes>
+        <Route path="new" element={<InwardRegisterForm />} />
+        <Route path="/" element={
+          <table style={{
+            width: '100%',
+            borderCollapse: 'collapse',
+            background: '#fff'
+          }}>
+            <thead>
+              <tr style={{ background: '#ff9800', fontWeight: 600, color: '#fff' }}>
+                <th style={thStyle}>SNo</th>
+                <th style={thStyle}>File Number</th>
+                <th style={thStyle}>Bank</th>
+                <th style={thStyle}>Inward Date</th>
+                <th style={thStyle}>Village / Town</th>
+                <th style={thStyle}>Status</th>
+                <th style={thStyle}>Remarks</th>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+            </thead>
+            <tbody>
+              {loading ? (
+                <tr>
+                  <td colSpan={7} style={{ textAlign: 'center', padding: 20 }}>Loading...</td>
+                </tr>
+              ) : inwards.length === 0 ? (
+                <tr>
+                  <td colSpan={7} style={{ textAlign: 'center', padding: 20 }}>No records found.</td>
+                </tr>
+              ) : (
+                filteredInwards.map((item, idx) => (
+                  <tr key={item.id || idx} style={{ background: idx % 2 === 0 ? '#f9f9f9' : '#fff' }}>
+                    <td style={tdStyle}>{idx + 1}</td>
+                    <td style={tdStyle}>
+                      <button style={{ color: '#2196f3', background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontWeight: 600 }} value={item.fileNumber} name="file_number">
+                        {item.fileNumber}
+                      </button>
+                    </td>
+                    <td style={tdStyle}>{item.bank}</td>
+                    <td style={tdStyle}>{item.inwardDate}</td>
+                    <td style={tdStyle}>{item.villageOrTown}</td>
+                    <td style={tdStyle}>{item.status}</td>
+                    <td style={tdStyle}>{item.remarks}</td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        } />
+      </Routes>
     </div>
   );
 };
