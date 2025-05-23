@@ -11,6 +11,7 @@ import { useAuth } from './components/AuthContext';
 import InwardRegisterPage from './components/pages/InwardRegisterPage';
 import InwardRegistryPage from './components/pages/InwardRegisterPage';
 import InwardRegisterForm from './components/pages/InwardRegisterForm';
+import InvoicePage from './components/pages/InvoicePage';
 
 function ProtectedRoute({ children }) {
   const { isLoggedIn } = useAuth();
@@ -51,7 +52,7 @@ function AppContent() {
             }
           />
           <Route path="/registry/*" element={<InwardRegisterPage />} />
-          
+          <Route path="/invoice" element={<InvoicePage />} />
         </Routes>
       </main>
       {!isDashboard && <Footer />}
