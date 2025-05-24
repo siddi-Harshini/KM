@@ -2,13 +2,13 @@
 .inward-registry-bg {
   background: #f4f6fa;
   min-height: 100vh;
-  padding-top: 32px;
+  padding-top: 0; /* Remove extra space above header */
   padding-bottom: 64px;
 }
 
 .inward-registry-form {
   max-width: 1200px;
-  margin: 32px auto 0 auto;
+  margin: 0 auto 0 auto; /* Start at top, no extra margin above */
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.08);
@@ -16,9 +16,21 @@
 }
 
 .inward-registry-header {
+  background: #43a047; /* Material green */
+  color: #fff;
   border-radius: 12px 12px 0 0;
   padding: 18px 0 10px 0;
   margin-bottom: 18px;
+  border-bottom: 2px solid #009688;
+  text-align: center;
+}
+
+.inward-registry-title {
+  margin: 0;
+  font-weight: 600;
+  font-size: 24px;
+  letter-spacing: 1px;
+  font-family: 'Roboto', Arial, sans-serif;
 }
 
 .inward-registry-grid {
@@ -68,4 +80,29 @@ label {
   padding: 12px 0;
   margin-top: 8px;
   box-shadow: 0 2px 8px rgba(0,150,136,0.08);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background: linear-gradient(90deg, #009688 0%, #43a047 100%);
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+  cursor: pointer;
+}
+
+.inward-registry-btn:active {
+  transform: scale(0.98);
+}
+
+.inward-registry-btn:focus {
+  outline: 2px solid #009688;
+  outline-offset: 2px;
+}
+
+.inward-registry-btn:hover {
+  background: linear-gradient(90deg, #43a047 0%, #009688 100%);
+  box-shadow: 0 4px 16px rgba(0,150,136,0.18);
 }

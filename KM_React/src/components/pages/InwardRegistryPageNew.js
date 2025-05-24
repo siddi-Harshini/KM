@@ -8,7 +8,28 @@ const valuationTypes = [
   '', 'Fresh Valuation', 'ReValuation', 'Stage Completion Certificate', 'Estimation', 'Structural Stability Certificate', 'Private Valuation', 'Revised Valuation', 'STAGE', 'Mater Valuation/Tie-up report', 'Visa Valuations', 'IBBI Valuation', 'NCLT Valuation', 'Incontinuation Letters', 'Capital Gains', 'Estimation Vetting', 'Master Valuation', 'Tie-Up Report', 'Renovation of Civil Works', 'Renovation of Interior Works', 'Proposed Estimation for Civil Works', 'Proposed Estimation for Interior Works', 'Proposed Estimation for PEB Structure'
 ];
 const purposes = [
-  '', 'For Bank Security Lending Purpose-Housing Loan', 'For bank Security lending purpose', 'Wetting Certificate', 'For Bank Security Lending Purpose-Education Loan', 'Improvements/Renovation works', 'For Bank Security Lending Purpose-Top-up', 'For Bank Security Lending Purpose-Self Construction', 'New Face Lift(NFL)', 'For Bank Security Lending Purpose-Take Over', 'Take over and Top-up', 'Resale or Purchase', 'Gruha Vikas/Mortgage loan', 'Purchase of New House', 'Subsequent', 'Internal Take over', 'Purchase of New flat', 'To Know the Fair Market Value of NPA Property-Under SARFAESI Act', 'To Know the Net Worth Value of the Property', 'Project Finance', 'Project Tie-Up', 'To Know the Fair Market Value of NPA Property-Under SARFAESI Act', 'SARFAESI'
+  { value: '', label: '--Select Purpose--' },
+  { value: 'For Bank Security Lending Purpose-Housing Loan', label: 'Housing Loan' },
+  { value: 'For bank Security lending purpose', label: 'For bank Security lending purpose' },
+  { value: 'Wetting Certificate', label: 'Wetting Certificate' },
+  { value: 'For Bank Security Lending Purpose-Education Loan', label: 'Education Loan' },
+  { value: 'Improvements/Renovation works', label: 'Improvements/Renovation works' },
+  { value: 'For Bank Security Lending Purpose-Top-up', label: 'Top-up' },
+  { value: 'For Bank Security Lending Purpose-Self Construction', label: 'Self Construction' },
+  { value: 'New Face Lift(NFL)', label: 'New Face Lift(NFL)' },
+  { value: 'For Bank Security Lending Purpose-Take Over', label: 'Take Over' },
+  { value: 'Take over and Top-up', label: 'Take over and Top-up' },
+  { value: 'Resale or Purchase', label: 'Resale or Purchase' },
+  { value: 'Gruha Vikas/Mortgage loan', label: 'Gruha Vikas/Mortgage loan' },
+  { value: 'Purchase of New House', label: 'Purchase of New House' },
+  { value: 'Subsequent', label: 'Subsequent' },
+  { value: 'Internal Take over', label: 'Internal Take over' },
+  { value: 'Purchase of New flat', label: 'Purchase of New flat' },
+  { value: 'To Know the Fair Market Value of NPA Property-Under SARFAESI Act', label: 'NPA' },
+  { value: 'To Know the Net Worth Value of the Property', label: 'Private' },
+  { value: 'Project Finance', label: 'Project Finance' },
+  { value: 'Project Tie-Up', label: 'Project Tie-Up' },
+  { value: 'To Know the Fair Market Value of NPA Property-Under SARFAESI Act', label: 'SARFAESI' }
 ];
 const schemes = [
   '', 'PVR1', 'PVR2', 'PVR3', 'PVR4', 'PVR5', 'PVR6', 'RACPC', 'SME', 'SARFAESI', 'Others'
@@ -34,49 +55,49 @@ const bankOptions = [
   // ...add all other options as needed...
 ];
 const userOptions = [
-  { value: '', label: 'Select User' },
-  { value: 'admin@gmail.com', label: 'admin@gmail.com' },
-  { value: 'siva@gmail.com', label: 'siva@gmail.com' },
-  { value: 'sudheer-freelancer@gmail.com', label: 'sudheer-freelancer@gmail.com' },
-  { value: 'ramarao@gmail.com', label: 'ramarao@gmail.com' },
-  { value: 'vineetha@gmail.com', label: 'vineetha@gmail.com' },
-  { value: 'Gowtham@GMAIL.COM', label: 'Gowtham@GMAIL.COM' },
-  { value: 'Ganesh@gmail.com', label: 'Ganesh@gmail.com' },
-  { value: 'Chandra@gmail.com', label: 'Chandra@gmail.com' },
-  { value: 'NVKM@gmail.com', label: 'NVKM@gmail.com' },
-  { value: 'Ramesh@gmail.com', label: 'Ramesh@gmail.com' },
-  { value: 'Akhil@gmail.com', label: 'Akhil@gmail.com' },
-  { value: 'Sirisha@gmail.com', label: 'Sirisha@gmail.com' },
-  { value: 'Hemanth@gmail.com', label: 'Hemanth@gmail.com' },
-  { value: 'OutSource@gamil.com', label: 'OutSource@gamil.com' },
-  { value: 'gsandhya@gmail.com', label: 'gsandhya@gmail.com' },
-  { value: 'vinithabarishetty@gmail.com', label: 'vinithabarishetty@gmail.com' },
-  { value: 'Chaithanyaupashi222@gmail.com', label: 'Chaithanyaupashi222@gmail.com' },
-  { value: 'bheemavarapudivya@gmail.com', label: 'bheemavarapudivya@gmail.com' },
-  { value: 'Naragonianuhya62@gmail.com', label: 'Naragonianuhya62@gmail.com' },
-  { value: 'sravanisambari756@gmail.com', label: 'sravanisambari756@gmail.com' },
-  { value: 'vijaynagaphanindrakasireddy@gmail.com72', label: 'vijaynagaphanindrakasireddy@gmail.com72' },
-  { value: 'aravindswamy.m@gmail.com', label: 'aravindswamy.m@gmail.com' },
-  { value: 'manasamansu76112@gmail.com', label: 'manasamansu76112@gmail.com' },
-  { value: 'Jyothi@gmail.com', label: 'Jyothi@gmail.com' },
-  { value: 'Cravikumar931@gmail.com', label: 'Cravikumar931@gmail.com' },
-  { value: 'srivanikanala01@gmail.com', label: 'srivanikanala01@gmail.com' },
-  { value: 'pamulakumar165@gmail.com', label: 'pamulakumar165@gmail.com' },
-  { value: 'kartheek@gmail.com', label: 'kartheek@gmail.com' },
-  { value: 'test@gmail.com', label: 'test@gmail.com' },
-  { value: 'sudheer-report@gmail.com', label: 'sudheer-report@gmail.com' },
-  { value: 'Chandu@gmail.com', label: 'Chandu@gmail.com' },
-  { value: 'newramesh@gmail.com', label: 'newramesh@gmail.com' },
-  { value: 'sandeep@gmail.com', label: 'sandeep@gmail.com' },
-  { value: 'naresh.6026@gmail.com', label: 'naresh.6026@gmail.com' },
-  { value: 'sharavan@gmail.com', label: 'sharavan@gmail.com' },
-  { value: 'SUNITHA@GMAIL.COM', label: 'SUNITHA@GMAIL.COM' },
-  { value: 'prakash@gmail.com', label: 'prakash@gmail.com' },
-  { value: 'karthikvisits@gmail.com', label: 'karthikvisits@gmail.com' },
-  { value: 'PraveenFreelancer@gmail.com', label: 'PraveenFreelancer@gmail.com' },
-  { value: 'nagarajufreelancer@gmail.com', label: 'nagarajufreelancer@gmail.com' },
-  { value: 'Vikranth@gmail.com', label: 'Vikranth@gmail.com' },
-  { value: 'jansi@gmail.com', label: 'jansi@gmail.com' }
+  '',
+  'admin@gmail.com',
+  'siva@gmail.com',
+  'sudheer-freelancer@gmail.com',
+  'ramarao@gmail.com',
+  'vineetha@gmail.com',
+  'Gowtham@GMAIL.COM',
+  'Ganesh@gmail.com',
+  'Chandra@gmail.com',
+  'NVKM@gmail.com',
+  'Ramesh@gmail.com',
+  'Akhil@gmail.com',
+  'Sirisha@gmail.com',
+  'Hemanth@gmail.com',
+  'OutSource@gamil.com',
+  'gsandhya@gmail.com',
+  'vinithabarishetty@gmail.com',
+  'Chaithanyaupashi222@gmail.com',
+  'bheemavarapudivya@gmail.com',
+  'Naragonianuhya62@gmail.com',
+  'sravanisambari756@gmail.com',
+  'vijaynagaphanindrakasireddy@gmail.com72',
+  'aravindswamy.m@gmail.com',
+  'manasamansu76112@gmail.com',
+  'Jyothi@gmail.com',
+  'Cravikumar931@gmail.com',
+  'srivanikanala01@gmail.com',
+  'pamulakumar165@gmail.com',
+  'kartheek@gmail.com',
+  'test@gmail.com',
+  'sudheer-report@gmail.com',
+  'Chandu@gmail.com',
+  'newramesh@gmail.com',
+  'sandeep@gmail.com',
+  'naresh.6026@gmail.com',
+  'sharavan@gmail.com',
+  'SUNITHA@GMAIL.COM',
+  'prakash@gmail.com',
+  'karthikvisits@gmail.com',
+  'PraveenFreelancer@gmail.com',
+  'nagarajufreelancer@gmail.com',
+  'Vikranth@gmail.com',
+  'jansi@gmail.com'
 ];
 
 const initialState = {
@@ -108,7 +129,8 @@ const initialState = {
   remarks: '',
   customer_details: '',
   agent_banker_details: '',
-  bank_ref_number: ''
+  bank_ref_number: '',
+  prohibited_zone: '' // Added field for 'Listed in Prohibited Zone?'
 };
 
 const InwardRegistryPageNew = () => {
@@ -122,28 +144,72 @@ const InwardRegistryPageNew = () => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
-    // TODO: Submit form to backend (API call)
-    setTimeout(() => {
-      setSubmitting(false);
-      alert('Registered!');
+    // Map frontend form fields to backend InwardRegister entity fields
+    const payload = {
+      fileNumber: form.file_number,
+      dataSheetNumber: form.data_sheet_number,
+      propertyType: form.Property_Type,
+      valuationType: form.valuation_type,
+      purpose: form.purpose,
+      scheme: form.scheme,
+      bank: form.creditor_id ? Number(form.creditor_id) : null, // creditor_id is a number (foreign key)
+      issuer: form.issuer,
+      fieldEngineer: form.field_engineer,
+      reportPreparedBy: form.report_prepared_by,
+      docsReceivedDate: form.docs_received_date,
+      inspectionDate: form.inspection_date,
+      fileStatus: form.file_status,
+      planApprovalAuthority: form.plan_approval_authority,
+      doorNum: form.door_num,
+      wardNum: form.ward_num,
+      blockNum: form.block_num,
+      plotNum: form.plot_num,
+      buildingName: form.building_name,
+      surveyNum: form.survey_num,
+      villageOrTown: form.village,
+      mandal: form.mandal,
+      district: form.district,
+      state: form.state,
+      pincode: form.pincode,
+      remarks: form.remarks,
+      customerDetails: form.customer_details,
+      agentBankerDetails: form.agent_banker_details,
+      bankRefNumber: form.bank_ref_number,
+      prohibitedZone: form.prohibited_zone
+    };
+    try {
+      const res = await fetch('http://localhost:8085/api/inward_register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error('Failed to register');
       setForm(initialState);
-    }, 1000);
+      alert('Registered!');
+    } catch (err) {
+      alert('Error: ' + err.message);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <div className="inward-registry-bg">
       <form className="w3-card inward-registry-form" onSubmit={handleSubmit} autoComplete="off">
-        <div className="w3-container w3-center w3-green inward-registry-header">
-          <h4>Inward Register</h4>
+        <div className="inward-registry-header w3-green">
+          <h4 className="inward-registry-title">Inward Register</h4>
         </div>
         <div className="inward-registry-grid">
           {/* Each field in a grid cell, label+input/select/textarea */}
           <div>
             <label>File Number</label>
-            <input className="w3-input" type="text" min="0" name="file_number" id="file_number" required value={form.file_number} onChange={handleChange} />
+            <input className="w3-input" type="text" min="0" name="file_number" id="file_number" required value={form.file_number} onChange={handleChange} onKeyDown={e => {
+              // Block comma, space, single quote, period
+              if ([188, 32, 222, 190].includes(e.which)) e.preventDefault();
+            }} />
           </div>
           <div>
             <label>Data Sheet Number</label>
@@ -152,16 +218,16 @@ const InwardRegistryPageNew = () => {
           <div>
             <label htmlFor="Property_Type">Property Type</label>
             <select className="w3-select" name="Property_Type" id="Property_Type" required value={form.Property_Type} onChange={handleChange}>
-              <option value="">Select Property Type-Reset</option>
+              <option value="" selected>Select Property Type-Reset</option>
               {propertyTypes.slice(1).map((type) => (
-                <option key={type} value={type}>{type.replace(/_/g, ' ')}</option>
+                <option key={type} value={type}>{type}</option>
               ))}
             </select>
           </div>
           <div>
             <label>Valuation Type</label>
             <select className="w3-select" name="valuation_type" value={form.valuation_type} onChange={handleChange}>
-              <option value="">--Select Type--</option>
+              <option value="" disabled selected>--Select Type--</option>
               {valuationTypes.slice(1).map((type) => (
                 <option key={type} value={type}>{type}</option>
               ))}
@@ -170,16 +236,15 @@ const InwardRegistryPageNew = () => {
           <div>
             <label>Purpose of Valuation</label>
             <select className="w3-select" name="purpose" value={form.purpose} onChange={handleChange}>
-              <option value="">--Select Purpose--</option>
-              {purposes.slice(1).map((type) => (
-                <option key={type} value={type}>{type}</option>
+              {purposes.map((opt, idx) => (
+                <option key={idx} value={opt.value} disabled={opt.value === ''} selected={opt.value === ''}>{opt.label}</option>
               ))}
             </select>
           </div>
           <div>
             <label>Scheme</label>
             <select className="w3-select" name="scheme" value={form.scheme} onChange={handleChange}>
-              <option value="">Select Scheme</option>
+              <option value="" disabled selected>Select Scheme</option>
               {schemes.slice(1).map((type) => (
                 <option key={type} value={type}>{type}</option>
               ))}
@@ -188,7 +253,8 @@ const InwardRegistryPageNew = () => {
           <div>
             <label htmlFor="creditor_id">Bank name</label>
             <select className="w3-select" name="creditor_id" id="creditor_id" required value={form.creditor_id} onChange={handleChange}>
-              {bankOptions.map((opt) => (
+              <option value="" disabled selected>Select Bank</option>
+              {bankOptions.slice(1).map((opt) => (
                 <option key={opt.value} value={opt.value}>{opt.label}</option>
               ))}
             </select>
@@ -196,24 +262,27 @@ const InwardRegistryPageNew = () => {
           <div>
             <label>To Whom it was issued</label>
             <select className="w3-select" name="issuer" value={form.issuer} onChange={handleChange}>
-              {userOptions.map((opt) => (
-                <option key={opt.value} value={opt.value}>{opt.label}</option>
+              <option value="" disabled selected>Select User</option>
+              {userOptions.slice(1).map((email) => (
+                <option key={email} value={email}>{email}</option>
               ))}
             </select>
           </div>
           <div>
             <label>Field Engineer</label>
             <select className="w3-select" name="field_engineer" value={form.field_engineer} onChange={handleChange}>
-              {userOptions.map((opt) => (
-                <option key={opt.value} value={opt.value}>{opt.label}</option>
+              <option value="" disabled selected>Select User</option>
+              {userOptions.slice(1).map((email) => (
+                <option key={email} value={email}>{email}</option>
               ))}
             </select>
           </div>
           <div>
             <label>Report Prepared By</label>
             <select className="w3-select" name="report_prepared_by" value={form.report_prepared_by} onChange={handleChange}>
-              {userOptions.map((opt) => (
-                <option key={opt.value} value={opt.value}>{opt.label}</option>
+              <option value="" disabled selected>Select User</option>
+              {userOptions.slice(1).map((email) => (
+                <option key={email} value={email}>{email}</option>
               ))}
             </select>
           </div>
@@ -228,7 +297,7 @@ const InwardRegistryPageNew = () => {
           <div>
             <label>File Status</label>
             <select className="w3-select" name="file_status" required value={form.file_status} onChange={handleChange}>
-              <option value="">Select Status</option>
+              <option value="" disabled selected>Select Status</option>
               {fileStatuses.slice(1).map((type) => (
                 <option key={type} value={type}>{type}</option>
               ))}
@@ -237,10 +306,19 @@ const InwardRegistryPageNew = () => {
           <div>
             <label>Plan Approval Authority</label>
             <select className="w3-select" name="plan_approval_authority" value={form.plan_approval_authority} onChange={handleChange}>
-              <option value="">--Select Authority--</option>
+              <option value="" disabled selected>--Select Authority--</option>
               {planAuthorities.slice(1).map((type) => (
                 <option key={type} value={type}>{type}</option>
               ))}
+            </select>
+          </div>
+          {/* Add Prohibited Zone field after Plan Approval Authority */}
+          <div>
+            <label>Listed in Prohibited Zone?</label>
+            <select className="w3-select" name="prohibited_zone" value={form.prohibited_zone} onChange={handleChange} required>
+              <option value="">--Select--</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
             </select>
           </div>
           <div>
