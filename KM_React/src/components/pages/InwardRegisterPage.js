@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import InwardRegisterForm from './InwardRegisterForm';
 
 const InwardRegisterPage = () => {
   const [inwards, setInwards] = useState([]);
@@ -140,7 +139,7 @@ const InwardRegisterPage = () => {
         Inward Registry <span style={{ fontWeight: 400, fontSize: 14 }}></span>
       </div>
       <Routes>
-        <Route path="new" element={<InwardRegisterForm />} />
+        {/* <Route path="new" element={<InwardRegisterForm />} /> */}
         <Route path="/" element={
           <table style={{
             width: '100%',

@@ -1,0 +1,71 @@
+/* Inward Registry New Page Styles */
+.inward-registry-bg {
+  background: #f4f6fa;
+  min-height: 100vh;
+  padding-top: 32px;
+  padding-bottom: 64px;
+}
+
+.inward-registry-form {
+  max-width: 1200px;
+  margin: 32px auto 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 32px 24px 24px 24px;
+}
+
+.inward-registry-header {
+  border-radius: 12px 12px 0 0;
+  padding: 18px 0 10px 0;
+  margin-bottom: 18px;
+}
+
+.inward-registry-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 32px;
+}
+
+@media (max-width: 900px) {
+  .inward-registry-form {
+    padding: 12px 4px 12px 4px;
+  }
+  .inward-registry-grid {
+    grid-template-columns: 1fr;
+    gap: 18px 0;
+  }
+}
+
+.w3-input, .w3-select, textarea.w3-input {
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  padding: 10px 12px;
+  font-size: 15px;
+  background: #fafbfc;
+  transition: border 0.2s, box-shadow 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.w3-input:focus, .w3-select:focus, textarea.w3-input:focus {
+  border: 1.5px solid #009688;
+  box-shadow: 0 0 0 2px #b2dfdb44;
+  outline: none;
+  background: #fff;
+}
+
+label {
+  font-weight: 500;
+  margin-bottom: 4px;
+  display: block;
+  color: #333;
+}
+
+.inward-registry-btn {
+  min-width: 180px;
+  font-size: 17px;
+  padding: 12px 0;
+  margin-top: 8px;
+  box-shadow: 0 2px 8px rgba(0,150,136,0.08);
+}

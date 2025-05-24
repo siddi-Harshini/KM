@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import UsersPage from './pages/UsersPage';
 import BanksPage from './pages/BanksPage';
 import InwardRegisterPage from './pages/InwardRegisterPage';
+import InwardRegistryPageNew from './pages/InwardRegistryPageNew';
 import { useAuth } from './AuthContext';
 import '../styles/Dashboard.css'; // Adjust path as needed
 
@@ -38,6 +39,10 @@ const Dashboard = () => {
   const isActive = (route) => {
     if (route === '.') {
       return location.pathname === '/' || location.pathname === '/dashboard' || location.pathname === '/dashboard/';
+    }
+    // For inward-registry, also match nested new route
+    if (route === 'inward-registry') {
+      return location.pathname.startsWith('/dashboard/inward-registry');
     }
     // For nested routes
     return location.pathname.endsWith(route) || location.pathname === `/dashboard/${route}`;
@@ -222,7 +227,12 @@ const Dashboard = () => {
           <Route path="." element={<div>Dashboard Home</div>} />
           <Route path="users" element={<UsersPage />} />
           <Route path="banks" element={<BanksPage />} />
-          <Route path="inward-registry" element={<InwardRegisterPage />} />
+          <Route path="inward-registry/*" element={
+            <Routes>
+              <Route path="/" element={<InwardRegisterPage />} />
+              <Route path="new" element={<InwardRegistryPageNew />} />
+            </Routes>
+          } />
           {/* Add other routes as needed */}
         </Routes>
       </main>
